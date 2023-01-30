@@ -1,0 +1,270 @@
+---
+sidebar: sidebar 
+permalink: use/manage-backend.html 
+keywords: how to use astra control, what is astra storage, how to set up astra storage backend, ontap storage in astra, backend storage in astra 
+summary: Añada almacenamiento para sus aplicaciones Kubernetes en las instalaciones. Astra Control descubre y utiliza los recursos que ya se han puesto en marcha, incluidos Trident, ONTAP y las clases de almacenamiento asociadas. 
+---
+= Gestione el entorno de administración del almacenamiento
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/use/
+
+
+Gestionar los clústeres de almacenamiento en Astra Control como back-end de almacenamiento le permite obtener vínculos entre los volúmenes persistentes (VP) y el back-end de almacenamiento, así como mediciones de almacenamiento adicionales. Puede supervisar la capacidad del almacenamiento y los detalles del estado, incluido el rendimiento si el Centro de control Astra está conectado a Cloud Insights.
+
+Para obtener instrucciones sobre cómo gestionar los back-ends de almacenamiento con la API Astra Control, consulte link:https://docs.netapp.com/us-en/astra-automation/["Información sobre API y automatización de Astra"^].
+
+Es posible completar las siguientes tareas relacionadas con la gestión de un back-end de almacenamiento:
+
+* link:../get-started/setup_overview.html#add-a-storage-backend["Añada un back-end de almacenamiento"]
+* <<Ver detalles del back-end de almacenamiento>>
+* <<Desgestione un back-end de almacenamiento>>
+* <<Actualizar una licencia de back-end de almacenamiento de Astra Data Store>>
+* <<Actualice un back-end de almacenamiento de Astra Data Store>>
+* <<Quite un back-end de almacenamiento>>
+* <<Añada nodos a un clúster de back-end de almacenamiento>>
+* <<Quite nodos de un clúster de back-end de almacenamiento>>
+
+
+
+
+== Ver detalles del back-end de almacenamiento
+
+Puede ver la información del back-end de almacenamiento desde Dashboard o desde la opción Backends.
+
+En la página Storage Backend Details, en Astra Data Store, puede consultar la siguiente información:
+
+* Clúster de almacén de datos de Astra
++
+** Rendimiento, IOPS y latencia
+** Capacidad utilizada en comparación con la capacidad total
+
+
+* Para cada volumen de clúster de Astra Data Store
++
+** Capacidad utilizada en comparación con la capacidad total
+** Rendimiento
+
+
+
+
+
+
+=== Consulte los detalles del back-end de almacenamiento en la Consola
+
+.Pasos
+. En la navegación de la izquierda, seleccione *Tablero*.
+. Revise la sección Storage backend que muestra el estado:
++
+** *Insalubre*: El almacenamiento no está en un estado óptimo. Esto puede deberse a un problema de latencia o a que una aplicación está degradada debido a un problema de contenedor, por ejemplo.
+** *Todo sano*: El almacenamiento ha sido gestionado y se encuentra en un estado óptimo.
+** *Descubierto*: El almacenamiento ha sido descubierto, pero no gestionado por Astra Control.
+
+
+
+
+
+
+=== Consulte los detalles del backends de almacenamiento en la opción Backends
+
+Vea información sobre el estado, la capacidad y el rendimiento del back-end (rendimiento de IOPS y/o latencia).
+
+Puede ver los volúmenes que usan las aplicaciones de Kubernetes, que se almacenan en un back-end de almacenamiento seleccionado. Con Cloud Insights, puede ver información adicional. Consulte https://docs.netapp.com/us-en/cloudinsights/["Documentación de Cloud Insights"].
+
+.Pasos
+. En el área de navegación de la izquierda, seleccione *Backends*.
+. Seleccione el back-end de almacenamiento.
++
+
+TIP: Si conectas a Cloud Insights de NetApp, aparecerán extractos de datos de Cloud Insights en la página backends.
+
++
+image:../use/acc_backends_ci_connection2.png["Captura de pantalla de la página backends"]
+
+. Para ir directamente a Cloud Insights, seleccione el icono *Cloud Insights* junto a la imagen de métricas.
+
+
+
+
+== Desgestione un back-end de almacenamiento
+
+Puede anular la gestión del back-end.
+
+.Pasos
+. En la navegación de la izquierda, seleccione *Backends*.
+. Seleccione el back-end de almacenamiento.
+. En el menú Opciones de la columna *acciones*, seleccione *Unmanage*.
+. Escriba "desgestionar" para confirmar la acción.
+. Seleccione *Sí, anular la administración del backend de almacenamiento*.
+
+
+
+
+== Quite un back-end de almacenamiento
+
+Puede eliminar un back-end de almacenamiento que ya no se esté utilizando. Se recomienda hacer esto para mantener su configuración sencilla y actualizada.
+
+
+TIP: Si va a eliminar un back-end de Astra Data Store, vCenter no debe haberlo creado.
+
+.Lo que necesitará
+* Asegúrese de que el back-end de almacenamiento no esté gestionado.
+* Asegúrese de que el back-end de almacenamiento no tenga ningún volumen asociado con el clúster de almacén de datos de Astra.
+
+
+.Pasos
+. En la navegación izquierda, seleccione *Backends*.
+. Si se gestiona el back-end, desgestione.
++
+.. Seleccione *gestionado*.
+.. Seleccione el back-end de almacenamiento.
+.. En la opción *acciones*, seleccione *Unmanage*.
+.. Escriba "desgestionar" para confirmar la acción.
+.. Seleccione *Sí, anular la administración del backend de almacenamiento*.
+
+
+. Seleccione *descubierto*.
++
+.. Seleccione el back-end de almacenamiento.
+.. En la opción *acciones*, seleccione *Quitar*.
+.. Escriba "eliminar" para confirmar la acción.
+.. Seleccione *Sí, quite el backend de almacenamiento*.
+
+
+
+
+
+
+== Actualizar una licencia de back-end de almacenamiento de Astra Data Store
+
+Puede actualizar la licencia de un back-end de almacenamiento de Astra Data Store para admitir una implementación mayor o funciones mejoradas.
+
+.Lo que necesitará
+* Un back-end de almacenamiento de Astra Data Store implementado y gestionado
+* Un archivo de licencia de Astra Data Store (póngase en contacto con su representante de ventas de NetApp para adquirir una licencia de Astra Data Store)
+
+
+.Pasos
+. En la navegación de la izquierda, seleccione *Backends*.
+. Seleccione el nombre de un back-end de almacenamiento.
+. En *Información básica*, puede ver el tipo de licencia instalada.
++
+Si pasa el ratón por encima de la información de la licencia, aparece un cuadro emergente con más información, como información sobre la caducidad y los derechos.
+
+. En *Licencia*, seleccione el icono de edición junto al nombre de la licencia.
+. En la página *Actualizar licencia*, siga uno de estos procedimientos:
++
+|===
+| Estado de la licencia | Acción 
+
+
+| Se ha añadido al menos una licencia a Astra Data Store.  a| 
+Seleccione una licencia de la lista.
+
+
+
+| No se han añadido licencias a Astra Data Store.  a| 
+.. Seleccione el botón *Agregar*.
+.. Seleccione un archivo de licencia para cargar.
+.. Seleccione *Agregar* para cargar el archivo de licencia.
+
+
+|===
+. Seleccione *Actualizar*.
+
+
+
+
+== Actualice un back-end de almacenamiento de Astra Data Store
+
+Puede actualizar su entorno de administración de Astra Data Store desde Astra Control Center. Para ello, primero debe cargar un paquete de actualización; Astra Control Center utilizará este paquete de actualización para actualizar Astra Data Store.
+
+.Lo que necesitará
+* Un back-end de almacenamiento gestionado de Astra Data Store
+* Un paquete de actualización de Astra Data Store cargado (consulte link:manage-packages-acc.html["Gestione los paquetes de software"])
+
+
+.Pasos
+. Seleccione *Backends*.
+. Elija un back-end de almacenamiento de Astra Data Store de la lista y seleccione el menú correspondiente en la columna *acciones*.
+. Seleccione *Actualizar*.
+. Seleccione una versión de actualización de la lista.
++
+Si tiene varios paquetes de actualización en el repositorio que son versiones diferentes, puede abrir la lista desplegable para seleccionar la versión que necesita.
+
+. Seleccione *Siguiente*.
+. Seleccione *Iniciar actualización*.
+
+
+.Resultado
+La página *backends* muestra un estado *Upgrade* en la columna *Status* hasta que la actualización se haya completado.
+
+
+
+== Añada nodos a un clúster de back-end de almacenamiento
+
+Puede agregar nodos a un clúster de almacén de datos de Astra, hasta el número de nodos admitidos por el tipo de licencia instalada para Astra Data Store.
+
+.Lo que necesitará
+* Un back-end de almacenamiento de Astra Data Store con licencia y puesto en marcha
+* Ha agregado el paquete de software Astra Data Store en Astra Control Center
+* Uno o más nodos nuevos para añadir al clúster
+
+
+.Pasos
+. En la navegación de la izquierda, seleccione *Backends*.
+. Seleccione el nombre de un back-end de almacenamiento.
+. En Basic Information, puede ver el número de nodos en este clúster de back-end de almacenamiento.
+. En *Nodes*, seleccione el icono de edición junto al número de nodos.
+. En la página *Add Nodes*, introduzca información sobre el nuevo nodo o nodos:
++
+.. Asigne una etiqueta de nodo para cada nodo.
+.. Debe realizar una de las siguientes acciones:
++
+*** Si desea que Astra Data Store utilice siempre el número máximo de nodos disponibles según su licencia, active la casilla de verificación * utilizar siempre hasta el número máximo de nodos permitidos*.
+*** Si no desea que Astra Data Store utilice siempre el número máximo de nodos disponibles, seleccione el número deseado de nodos totales que desea utilizar.
+
+
+.. Si implementó Astra Data Store con Protection Domains habilitado, asigne el nodo o los nodos nuevos a Protection Domains.
+
+
+. Seleccione *Siguiente*.
+. Introduzca la dirección IP y la información de red para cada nodo nuevo. Introduzca una sola dirección IP para un solo nodo nuevo o un pool de direcciones IP para varios nodos nuevos.
++
+Si Astra Data Store puede utilizar las direcciones IP configuradas durante la implementación, no necesita introducir ninguna información de dirección IP.
+
+. Seleccione *Siguiente*.
+. Revise la configuración de los nodos nuevos.
+. Seleccione *Agregar nodos*.
+
+
+
+
+== Quite nodos de un clúster de back-end de almacenamiento
+
+Puede eliminar nodos de un clúster de almacén de datos de Astra. Estos nodos pueden estar en buen estado o con errores.
+
+Al quitar un nodo de un clúster Astra Data Store, se mueven sus datos a otros nodos del clúster y se quita el nodo de Astra Data Store.
+
+El proceso requiere las siguientes condiciones:
+
+* Debe haber suficiente espacio libre en los otros nodos para recibir los datos.
+* Debe haber 4 o más nodos en el clúster.
+
+
+.Pasos
+. En la navegación de la izquierda, seleccione *Backends*.
+. Seleccione el nombre de un back-end de almacenamiento.
+. Seleccione la ficha *Nodes*.
+. En el menú acciones, seleccione *Quitar*.
+. Confirme la eliminación introduciendo "eliminar".
+. Seleccione *Sí, eliminar nodo*.
+
+
+
+
+== Obtenga más información
+
+* https://docs.netapp.com/us-en/astra-automation/index.html["Utilice la API Astra Control"^]
+

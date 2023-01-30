@@ -1,0 +1,98 @@
+---
+sidebar: sidebar 
+permalink: use/manage-connections.html 
+keywords: manage package, packages, install 
+summary: Puede cargar e instalar paquetes en Astra Control Center. 
+---
+= Gestionar conexiones de repositorios
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/use/
+
+
+Puede conectar repositorios a Astra Control para utilizarlos como referencia para imágenes y artefactos de instalación de paquetes de software. Al importar paquetes de software, Astra Control hace referencia a imágenes de instalación en el repositorio de imágenes y binarios y otros artefactos en el repositorio de artefactos.
+
+.Lo que necesitará
+* Clúster Kubernetes con Astra Control Center instalado
+* Un repositorio de Docker en ejecución al que se puede acceder
+* Un repositorio de artefactos en ejecución (como Artifactory) al que se puede acceder
+
+
+
+
+== Conecte un repositorio de imágenes Docker
+
+Puede conectar un repositorio de imágenes Docker para almacenar imágenes de instalación del paquete, como las de Astra Data Store. Al instalar paquetes, Astra Control importa los archivos de imagen del paquete desde el repositorio de imágenes.
+
+.Pasos
+. En el área de navegación *Administrar su cuenta*, seleccione *cuenta*.
+. Seleccione la ficha *conexiones*.
+. En la sección *Docker Image Repository*, seleccione el menú de la parte superior derecha.
+. Seleccione *conectar*.
+. Añada la URL y el puerto para el repositorio.
+. Introduzca las credenciales del repositorio.
+. Seleccione *conectar*.
+
+
+.Resultado
+El repositorio está conectado. En la sección *Docker Image Repository*, el repositorio debe mostrar un estado conectado.
+
+
+
+== Desconecte un repositorio de imágenes Docker
+
+Puede eliminar la conexión a un repositorio de imágenes Docker si ya no es necesario.
+
+.Pasos
+. En el área de navegación *Administrar su cuenta*, seleccione *cuenta*.
+. Seleccione la ficha *conexiones*.
+. En la sección *Docker Image Repository*, seleccione el menú de la parte superior derecha.
+. Seleccione *desconectar*.
+. Seleccione *Sí, desconecte el repositorio de imágenes Docker*.
+
+
+.Resultado
+El repositorio está desconectado. En la sección *Docker Image Repository*, el repositorio debe mostrar un estado desconectado.
+
+
+
+== Conecte un repositorio de artefactos
+
+Puede conectar un repositorio de artefactos a artefactos host como los binarios de paquetes de software. Al instalar paquetes, Astra Control importa los artefactos para los paquetes de software desde el repositorio de imágenes.
+
+.Pasos
+. En el área de navegación *Administrar su cuenta*, seleccione *cuenta*.
+. Seleccione la ficha *conexiones*.
+. En la sección *repositorio de artefactos*, seleccione el menú de la parte superior derecha.
+. Seleccione *conectar*.
+. Añada la URL y el puerto para el repositorio.
+. Si se requiere autenticación, active la casilla de verificación *usar autenticación* e introduzca las credenciales del repositorio.
+. Seleccione *conectar*.
+
+
+.Resultado
+El repositorio está conectado. En la sección *repositorio de artefactos*, el repositorio debe mostrar un estado conectado.
+
+
+
+== Desconecte un repositorio de artefactos
+
+Puede eliminar la conexión a un repositorio de artefactos si ya no es necesaria.
+
+.Pasos
+. En el área de navegación *Administrar su cuenta*, seleccione *cuenta*.
+. Seleccione la ficha *conexiones*.
+. En la sección *repositorio de artefactos*, seleccione el menú de la parte superior derecha.
+. Seleccione *desconectar*.
+. Seleccione *Sí, desconectar el repositorio de artefactos*.
+
+
+.Resultado
+El repositorio está desconectado. En la sección *repositorio de artefactos*, el repositorio debe mostrar un estado conectado.
+
+[discrete]
+== Obtenga más información
+
+* link:manage-packages-acc.html["Gestione los paquetes de software"]
+

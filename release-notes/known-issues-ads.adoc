@@ -1,0 +1,93 @@
+---
+sidebar: sidebar 
+permalink: release-notes/known-issues-ads.html 
+keywords: astra, control center, ads, data store, bugs, known issues, problems 
+summary: Los problemas conocidos identifican problemas por los que el uso correcto de esta versión del producto puede resultar imposible. 
+---
+= Problemas conocidos de Astra Data Store y esta versión de Astra Control Center
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/release-notes/
+
+
+Los problemas conocidos identifican problemas por los que el uso correcto de esta versión del producto puede resultar imposible.
+
+https://docs.netapp.com/us-en/astra-data-store/release-notes/known-issues.html["Vea estos problemas adicionales conocidos de Astra Data Store"^] Esta situación puede afectar a la gestión de Astra Data Store con la versión actual de Astra Control Center.
+
+
+
+== Los detalles del volumen de Astra Data Store no aparecen en la página Storage Backends de la interfaz de usuario de Astra Control Center
+
+Detalles como la capacidad y el rendimiento no aparecen en la interfaz de usuario de. Cuando se produce este problema, anule la gestión del back-end de almacenamiento y vuelva a añadirlo.
+
+
+
+== Para desinstalar un clúster con Astra Data Store es necesario eliminar primero una aplicación de sistema gestionado
+
+Si agregó un clúster que contiene Astra Data Store a un clúster de Astra Control Center, la aplicación astrads-System se gestiona de forma predeterminada como una aplicación oculta. Para desgestionar el clúster, primero debe desgestionar la aplicación astrads-System. No puede anular la gestión de este tipo de aplicaciones mediante la interfaz de usuario de Astra Control Center. En su lugar, utilice una solicitud de API de Astra Control para eliminar manualmente la aplicación:
+
+.Detalles
+[%collapsible]
+====
+.Pasos
+. Obtenga el ID del clúster gestionado mediante esta API:
++
+[listing]
+----
+/accounts/{account_id}/topology/v1/managedClusters
+----
++
+Respuesta:
+
++
+[listing, subs="+quotes"]
+----
+{
+"items": [
+{
+"type": "application/astra-managedCluster",
+"version": "1.1",
+*"id": "123ab987-0bc0-00d0-a00a-1234567abd8d",*
+"name": "astrads-cluster-1234567",
+...
+----
+. Obtenga el ID de aplicación del sistema de astrads gestionado:
++
+[listing]
+----
+/accounts/{account_id}/topology/v2/managedClusters/{managedCluster_id}/apps
+----
++
+Respuesta:
+
++
+[listing, subs="+quotes"]
+----
+{
+  "items": [
+    [
+      *"1b011d11-bb88-40c7-a1a1-ab1234c123d3",*
+      "astrads-system",
+      "ready"
+    ]
+  ],
+  "metadata": {}
+}
+----
+. Elimine la aplicación astrads-System mediante el ID de aplicación adquirido en el paso anterior (`1b011d11-bb88-40c7-a1a1-ab1234c123d3`).
++
+[listing]
+----
+/accounts/{account_id}/k8s/v2/apps/{astrads-system_app_id}
+----
+
+
+====
+
+
+== Obtenga más información
+
+* link:../release-notes/known-issues.html["Problemas conocidos"]
+* link:../release-notes/known-limitations.html["Limitaciones conocidas"]
+

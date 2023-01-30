@@ -1,0 +1,163 @@
+---
+sidebar: sidebar 
+permalink: use/manage-users.html 
+keywords: add users, edit users, remove users, delete users 
+summary: Añada usuarios al sistema Astra Control Center y elimine los usuarios que ya no tengan acceso al sistema. 
+---
+= Gestionar usuarios
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/use/
+
+
+Puede invitar, añadir, eliminar y editar a los usuarios de la instalación de Astra Control Center mediante la interfaz de usuario de Astra Control. Puede utilizar la interfaz de usuario de Astra Control o. https://docs.netapp.com/us-en/astra-automation/index.html["La API de control Astra"^] para gestionar usuarios.
+
+También se puede utilizar LDAP para realizar autenticación para los usuarios seleccionados.
+
+
+
+== Utilice LDAP
+
+LDAP es un protocolo estándar del sector para acceder a información de directorio distribuida y una opción muy popular para la autenticación empresarial. Puede conectar Astra Control Center a un servidor LDAP para realizar la autenticación de los usuarios seleccionados de Astra. En un nivel elevado, la configuración implica integrar Astra con LDAP y definir los usuarios y grupos de Astra correspondientes a las definiciones LDAP. Consulte https://docs.netapp.com/us-en/astra-automation/workflows_infra/ldap_prepare.html["Autenticación LDAP"^] si quiere más información.
+
+
+
+== Invitar a los usuarios
+
+Los propietarios y administradores de cuentas pueden invitar a nuevos usuarios a Astra Control Center.
+
+.Pasos
+. En el área de navegación *Administrar su cuenta*, seleccione *cuenta*.
+. Seleccione la ficha *usuarios*.
+. Seleccione *Invitar usuario*.
+. Introduzca el nombre y la dirección de correo electrónico del usuario.
+. Seleccione una función de usuario con los permisos de sistema adecuados.
++
+Cada rol proporciona los siguientes permisos:
+
++
+** Un *Visor* puede ver los recursos.
+** Un *Miembro* tiene permisos de función de Viewer y puede administrar aplicaciones y clústeres, anular la administración de aplicaciones y eliminar instantáneas y copias de seguridad.
+** Un *Admin* tiene permisos de rol de miembro y puede agregar y quitar cualquier otro usuario excepto el propietario.
+** *Owner* tiene permisos de función de administrador y puede agregar y eliminar cualquier cuenta de usuario.
+
+
+. Para agregar restricciones a un usuario con un rol de miembro o de visor, active la casilla de verificación *restringir la función a restricciones* .
++
+Para obtener más información sobre cómo agregar restricciones, consulte link:manage-roles.html["Gestionar roles"].
+
+. Seleccione *Invitar usuarios*.
++
+El usuario recibe un correo electrónico informándole de que ha sido invitado a Astra Control Center. El correo electrónico incluye una contraseña temporal, que deberá cambiar en el primer inicio de sesión.
+
+
+
+
+
+== Añadir usuarios
+
+Los propietarios y administradores de cuentas pueden agregar más usuarios a la instalación de Astra Control Center.
+
+.Pasos
+. En el área de navegación *Administrar su cuenta*, seleccione *cuenta*.
+. Seleccione la ficha *usuarios*.
+. Seleccione *Agregar usuario*.
+. Introduzca el nombre del usuario, la dirección de correo electrónico y una contraseña temporal.
++
+El usuario deberá cambiar la contraseña en el primer inicio de sesión.
+
+. Seleccione una función de usuario con los permisos de sistema adecuados.
++
+Cada rol proporciona los siguientes permisos:
+
++
+** Un *Visor* puede ver los recursos.
+** Un *Miembro* tiene permisos de función de Viewer y puede administrar aplicaciones y clústeres, anular la administración de aplicaciones y eliminar instantáneas y copias de seguridad.
+** Un *Admin* tiene permisos de rol de miembro y puede agregar y quitar cualquier otro usuario excepto el propietario.
+** *Owner* tiene permisos de función de administrador y puede agregar y eliminar cualquier cuenta de usuario.
+
+
+. Para agregar restricciones a un usuario con un rol de miembro o de visor, active la casilla de verificación *restringir la función a restricciones* .
++
+Para obtener más información sobre cómo agregar restricciones, consulte link:manage-roles.html["Gestionar roles"].
+
+. Seleccione *Agregar*.
+
+
+
+
+== Gestionar contraseñas
+
+Puede gestionar las contraseñas de las cuentas de usuario en Astra Control Center.
+
+
+
+=== Cambie la contraseña
+
+Puede cambiar la contraseña de su cuenta de usuario en cualquier momento.
+
+.Pasos
+. Seleccione el icono Usuario situado en la parte superior derecha de la pantalla.
+. Seleccione *Perfil*.
+. En el menú Opciones de la columna *acciones* y seleccione *Cambiar contraseña*.
+. Introduzca una contraseña que se ajuste a los requisitos de contraseña.
+. Introduzca una vez más la contraseña para confirmarla.
+. Seleccione *Cambiar contraseña*.
+
+
+
+
+=== Restablecer la contraseña de otro usuario
+
+Si su cuenta tiene permisos de rol de administrador o propietario, puede restablecer las contraseñas de otras cuentas de usuario así como las suyas propias. Al restablecer una contraseña, asigna una contraseña temporal que el usuario tendrá que cambiar al iniciar sesión.
+
+.Pasos
+. En el área de navegación *Administrar su cuenta*, seleccione *cuenta*.
+. Seleccione la lista desplegable *acciones*.
+. Seleccione *Restablecer contraseña*.
+. Introduzca una contraseña temporal que cumpla los requisitos de contraseña.
+. Introduzca una vez más la contraseña para confirmarla.
++
+
+NOTE: La próxima vez que el usuario inicie sesión, se le pedirá que cambie la contraseña.
+
+. Seleccione *Restablecer contraseña*.
+
+
+
+
+== Cambiar el rol de un usuario
+
+Los usuarios con el rol propietario pueden cambiar el rol de todos los usuarios, mientras que los usuarios con el rol Admin pueden cambiar el rol de los usuarios que tienen el rol Admin, Member o Viewer.
+
+.Pasos
+. En el área de navegación *Administrar su cuenta*, seleccione *cuenta*.
+. Seleccione la lista desplegable *acciones*.
+. Seleccione *Editar rol*.
+. Seleccione un rol nuevo.
+. Para aplicar restricciones a la función, active la casilla de verificación *restringir la función a restricciones* y seleccione una restricción de la lista.
++
+Si no hay restricciones, puede agregar una restricción. Para obtener más información, consulte link:manage-roles.html["Gestionar roles"].
+
+. Seleccione *Confirmar*.
+
+
+.Resultado
+Astra Control Center actualiza los permisos del usuario en función de la nueva función que haya seleccionado.
+
+
+
+== Quitar usuarios
+
+Los usuarios con el rol propietario o administrador pueden eliminar otros usuarios de la cuenta en cualquier momento.
+
+.Pasos
+. En el área de navegación *Administrar su cuenta*, seleccione *cuenta*.
+. En la ficha *usuarios* , active la casilla de verificación en la fila de cada usuario que desee quitar.
+. En el menú Opciones de la columna *acciones*, seleccione *Eliminar usuario/s*.
+. Cuando se le solicite, confirme la eliminación escribiendo la palabra "eliminar" y, a continuación, seleccione *Sí, Eliminar usuario*.
+
+
+.Resultado
+Astra Control Center elimina al usuario de la cuenta.

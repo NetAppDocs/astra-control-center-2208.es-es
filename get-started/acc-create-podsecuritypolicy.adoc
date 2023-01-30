@@ -1,0 +1,66 @@
+---
+sidebar: sidebar 
+permalink: get-started/acc-create-podsecuritypolicy.html 
+keywords: Create podsecurity policy, pod, security, policy, Astra Control, kubernetes 
+summary: Debe crear una directiva de seguridad de POD menos restrictiva para habilitar Astra Control para crear y actualizar POD en clústeres gestionados. 
+---
+= Cree una directiva de seguridad de POD personalizada
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/get-started/
+
+
+Astra Control debe crear y gestionar pods de Kubernetes en los clústeres que gestiona. Si el clúster utiliza una directiva de seguridad de POD restrictiva que no permite la creación de POD con privilegios ni permite que los procesos dentro de los contenedores Pod se ejecuten como usuario raíz, debe crear una directiva de seguridad de POD menos restrictiva para permitir que Astra Control cree y administre estas POD.
+
+.Pasos
+. Cree una directiva de seguridad de POD para el clúster que sea menos restrictiva que la predeterminada y guárdela en un archivo. Por ejemplo:
++
+[source, yaml]
+----
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: astracontrol
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
+spec:
+  privileged: true
+  allowPrivilegeEscalation: true
+  allowedCapabilities:
+  - '*'
+  volumes:
+  - '*'
+  hostNetwork: true
+  hostPorts:
+  - min: 0
+    max: 65535
+  hostIPC: true
+  hostPID: true
+  runAsUser:
+    rule: 'RunAsAny'
+  seLinux:
+    rule: 'RunAsAny'
+  supplementalGroups:
+    rule: 'RunAsAny'
+  fsGroup:
+    rule: 'RunAsAny'
+----
+. Cree un nuevo rol para la política de seguridad del pod.
++
+[source, sh]
+----
+kubectl-admin create role psp:astracontrol \
+    --verb=use \
+    --resource=podsecuritypolicy \
+    --resource-name=astracontrol
+----
+. Vincule el nuevo rol a la cuenta de servicio.
++
+[source, sh]
+----
+kubectl-admin create rolebinding default:psp:astracontrol \
+    --role=psp:astracontrol \
+    --serviceaccount=astracontrol-service-account:default
+----
+

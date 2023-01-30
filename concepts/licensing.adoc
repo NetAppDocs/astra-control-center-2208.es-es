@@ -1,0 +1,41 @@
+---
+sidebar: sidebar 
+permalink: concepts/licensing.html 
+keywords: license, licensing 
+summary: Descubra cómo las acciones que puede realizar con Astra Control Center difieren en función del estado de la licencia y cómo afecta el uso que haga de Astra Control Center al consumo de licencias. 
+---
+= Licencia
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/concepts/
+
+
+[role="lead"]
+Astra Control Center requiere la instalación de una licencia para habilitar la funcionalidad completa de gestión de datos de aplicaciones. Cuando se implementa Astra Control Center sin una licencia, se muestra un banner en la interfaz de usuario web, con la advertencia de que la funcionalidad del sistema es limitada.
+
+Necesita una licencia para proteger sus aplicaciones y datos. Consulte Astra Control Center link:../concepts/intro.html["funciones"] para obtener más detalles.
+
+Después de adquirir el producto, recibirá un número de serie y una licencia. Es posible generar el archivo de licencia de NetApp (NLF) a partir de https://mysupport.netapp.com["Sitio de soporte de NetApp"^].
+
+También puede probar Astra Control Center con una licencia de evaluación, que le permite utilizar Astra Control Center durante 90 días a partir de la fecha de descarga de la licencia. Para obtener más información, consulte link:../get-started/requirements.html["Requisitos"].
+
+Para obtener más información sobre las licencias necesarias para los back-ends de almacenamiento de ONTAP, consulte link:../get-started/requirements.html["compatibles con los back-ends de almacenamiento"].
+
+
+NOTE: Puede añadir un clúster, añadir un bloque y gestionar un back-end de almacenamiento sin una licencia.
+
+
+
+== Cómo se calcula el consumo de licencias
+
+Al añadir un nuevo clúster a Astra Control Center, no cuenta con licencias consumidas hasta que Astra Control Center gestione al menos una aplicación que se ejecute en el clúster.
+
+Cuando se empieza a gestionar una aplicación en un clúster, todas las unidades CPU del clúster se incluyen en el consumo de licencia de Astra Control Center.
+
+
+
+== Obtenga más información
+
+* link:../use/update-licenses.html["Actualizar una licencia existente"]
+

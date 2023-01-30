@@ -1,0 +1,622 @@
+---
+sidebar: sidebar 
+permalink: use/execution-hook-examples.html 
+keywords: execution hook, hook, script, examples 
+summary: Utilice los siguientes ejemplos para obtener una idea de cómo estructurar los enlaces de ejecución. 
+---
+= Ejemplos de gancho de ejecución
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/use/
+
+
+[role="lead"]
+Utilice los siguientes ejemplos para obtener una idea de cómo estructurar los enlaces de ejecución. Puede utilizar estos enlaces como plantillas o como scripts de prueba.
+
+
+
+== Ejemplo de éxito simple
+
+Este es un ejemplo de un simple enlace que se realiza correctamente y escribe un mensaje en la salida estándar y en un error estándar.
+
+[source]
+----
+#!/bin/sh
+
+# success_sample.sh
+#
+# A simple noop success hook script for testing purposes.
+#
+# args: None
+#
+
+
+#
+# Writes the given message to standard output
+#
+# $* - The message to write
+#
+msg() {
+    echo "$*"
+}
+
+
+#
+# Writes the given information message to standard output
+#
+# $* - The message to write
+#
+info() {
+    msg "INFO: $*"
+}
+
+#
+# Writes the given error message to standard error
+#
+# $* - The message to write
+#
+error() {
+    msg "ERROR: $*" 1>&2
+}
+
+
+#
+# main
+#
+
+# log something to stdout
+info "running success_sample.sh"
+
+# exit with 0 to indicate success
+info "exit 0"
+exit 0
+----
+
+
+== Ejemplo de éxito simple (versión de bash)
+
+Este es un ejemplo de un simple enlace que funciona y escribe un mensaje en la salida estándar y en un error estándar, escrito para bash.
+
+[source]
+----
+#!/bin/bash
+
+# success_sample.bash
+#
+# A simple noop success hook script for testing purposes.
+#
+# args: None
+
+
+#
+# Writes the given message to standard output
+#
+# $* - The message to write
+#
+msg() {
+    echo "$*"
+}
+
+
+#
+# Writes the given information message to standard output
+#
+# $* - The message to write
+#
+info() {
+    msg "INFO: $*"
+}
+
+#
+# Writes the given error message to standard error
+#
+# $* - The message to write
+#
+error() {
+    msg "ERROR: $*" 1>&2
+}
+
+
+#
+# main
+#
+
+# log something to stdout
+info "running success_sample.bash"
+
+# exit with 0 to indicate success
+info "exit 0"
+exit 0
+----
+
+
+== Ejemplo sencillo de éxito (versión zsh)
+
+Este es un ejemplo de un simple enlace que se realiza correctamente y escribe un mensaje en la salida estándar y en un error estándar, escrito para el shell Z.
+
+[source]
+----
+#!/bin/zsh
+
+# success_sample.zsh
+#
+# A simple noop success hook script for testing purposes.
+#
+# args: None
+#
+
+
+#
+# Writes the given message to standard output
+#
+# $* - The message to write
+#
+msg() {
+    echo "$*"
+}
+
+
+#
+# Writes the given information message to standard output
+#
+# $* - The message to write
+#
+info() {
+    msg "INFO: $*"
+}
+
+#
+# Writes the given error message to standard error
+#
+# $* - The message to write
+#
+error() {
+    msg "ERROR: $*" 1>&2
+}
+
+#
+# main
+#
+
+# log something to stdout
+info "running success_sample.zsh"
+
+# exit with 0 to indicate success
+info "exit 0"
+exit 0
+----
+
+
+== Éxito con argumentos ejemplo
+
+En el siguiente ejemplo se muestra cómo se pueden utilizar args en un gancho.
+
+[source]
+----
+#!/bin/sh
+
+# success_sample_args.sh
+#
+# A simple success hook script with args for testing purposes.
+#
+# args: Up to two optional args that are echoed to stdout
+
+#
+# Writes the given message to standard output
+#
+# $* - The message to write
+#
+msg() {
+    echo "$*"
+}
+
+
+#
+# Writes the given information message to standard output
+#
+# $* - The message to write
+#
+info() {
+    msg "INFO: $*"
+}
+
+#
+# Writes the given error message to standard error
+#
+# $* - The message to write
+#
+error() {
+    msg "ERROR: $*" 1>&2
+}
+
+
+#
+# main
+#
+
+# log something to stdout
+info "running success_sample_args.sh"
+
+
+# collect args
+arg1=$1
+arg2=$2
+
+# output args and arg count to stdout
+info "number of args: $#"
+info "arg1 ${arg1}"
+info "arg2 ${arg2}"
+
+# exit with 0 to indicate success
+info "exit 0"
+exit 0
+----
+
+
+== Ejemplo de gancho de instantánea previa/posinstantánea
+
+En el siguiente ejemplo se muestra cómo se puede utilizar el mismo script tanto para una instantánea previa como para un enlace posterior a una instantánea.
+
+[source]
+----
+#!/bin/sh
+
+# success_sample_pre_post.sh
+#
+# A simple success hook script example with an arg for testing purposes
+# to demonstrate how the same script can be used for both a prehook and posthook
+#
+# args: [pre|post]
+
+# unique error codes for every error case
+ebase=100
+eusage=$((ebase+1))
+ebadstage=$((ebase+2))
+epre=$((ebase+3))
+epost=$((ebase+4))
+
+
+#
+# Writes the given message to standard output
+#
+# $* - The message to write
+#
+msg() {
+    echo "$*"
+}
+
+
+#
+# Writes the given information message to standard output
+#
+# $* - The message to write
+#
+info() {
+    msg "INFO: $*"
+}
+
+#
+# Writes the given error message to standard error
+#
+# $* - The message to write
+#
+error() {
+    msg "ERROR: $*" 1>&2
+}
+
+
+#
+# Would run prehook steps here
+#
+prehook() {
+    info "Running noop prehook"
+    return 0
+}
+
+#
+# Would run posthook steps here
+#
+posthook() {
+    info "Running noop posthook"
+    return 0
+}
+
+
+#
+# main
+#
+
+# check arg
+stage=$1
+if [ -z "${stage}" ]; then
+    echo "Usage: $0 <pre|post>"
+    exit ${eusage}
+fi
+
+if [ "${stage}" != "pre" ] && [ "${stage}" != "post" ]; then
+    echo "Invalid arg: ${stage}"
+    exit ${ebadstage}
+fi
+
+# log something to stdout
+info "running success_sample_pre_post.sh"
+
+if [ "${stage}" = "pre" ]; then
+    prehook
+    rc=$?
+    if [ ${rc} -ne 0 ]; then
+        error "Error during prehook"
+    fi
+fi
+
+if [ "${stage}" = "post" ]; then
+    posthook
+    rc=$?
+    if [ ${rc} -ne 0 ]; then
+        error "Error during posthook"
+    fi
+fi
+
+exit ${rc}
+----
+
+
+== Ejemplo de fallo
+
+En el siguiente ejemplo se muestra cómo puede controlar los fallos en un gancho.
+
+[source]
+----
+#!/bin/sh
+
+# failure_sample_arg_exit_code.sh
+#
+# A simple failure hook script for testing purposes.
+#
+# args: [the exit code to return]
+#
+
+
+#
+# Writes the given message to standard output
+#
+# $* - The message to write
+#
+msg() {
+    echo "$*"
+}
+
+
+#
+# Writes the given information message to standard output
+#
+# $* - The message to write
+#
+info() {
+    msg "INFO: $*"
+}
+
+#
+# Writes the given error message to standard error
+#
+# $* - The message to write
+#
+error() {
+    msg "ERROR: $*" 1>&2
+}
+
+
+#
+# main
+#
+
+# log something to stdout
+info "running failure_sample_arg_exit_code.sh"
+
+argexitcode=$1
+
+# log to stderr
+error "script failed, returning exit code ${argexitcode}"
+
+# exit with specified exit code
+exit ${argexitcode}
+----
+
+
+== Ejemplo de fallo detallado
+
+En el ejemplo siguiente se muestra cómo puede controlar los errores en un enlace, con un registro más detallado.
+
+[source]
+----
+#!/bin/sh
+
+# failure_sample_verbose.sh
+#
+# A simple failure hook script with args for testing purposes.
+#
+# args: [The number of lines to output to stdout]
+
+
+#
+# Writes the given message to standard output
+#
+# $* - The message to write
+#
+msg() {
+    echo "$*"
+}
+
+
+#
+# Writes the given information message to standard output
+#
+# $* - The message to write
+#
+info() {
+    msg "INFO: $*"
+}
+
+#
+# Writes the given error message to standard error
+#
+# $* - The message to write
+#
+error() {
+    msg "ERROR: $*" 1>&2
+}
+
+
+#
+# main
+#
+
+# log something to stdout
+info "running failure_sample_verbose.sh"
+
+
+# output arg value to stdout
+linecount=$1
+info "line count ${linecount}"
+
+# write out a line to stdout based on line count arg
+i=1
+while [ "$i" -le ${linecount} ]; do
+    info "This is line ${i} from failure_sample_verbose.sh"
+    i=$(( i + 1 ))
+done
+
+error "exiting with error code 8"
+exit 8
+----
+
+
+== Fallo con un ejemplo de código de salida
+
+En el siguiente ejemplo se muestra un error de enlace con un código de salida.
+
+[source]
+----
+#!/bin/sh
+
+# failure_sample_arg_exit_code.sh
+#
+# A simple failure hook script for testing purposes.
+#
+# args: [the exit code to return]
+#
+
+
+#
+# Writes the given message to standard output
+#
+# $* - The message to write
+#
+msg() {
+    echo "$*"
+}
+
+
+#
+# Writes the given information message to standard output
+#
+# $* - The message to write
+#
+info() {
+    msg "INFO: $*"
+}
+
+#
+# Writes the given error message to standard error
+#
+# $* - The message to write
+#
+error() {
+    msg "ERROR: $*" 1>&2
+}
+
+
+#
+# main
+#
+
+# log something to stdout
+info "running failure_sample_arg_exit_code.sh"
+
+argexitcode=$1
+
+# log to stderr
+error "script failed, returning exit code ${argexitcode}"
+
+# exit with specified exit code
+exit ${argexitcode}
+----
+
+
+== Ejemplo de éxito tras fallo
+
+El siguiente ejemplo muestra un gancho que falla la primera vez que se ejecuta, pero que tiene éxito después de la segunda ejecución.
+
+[source]
+----
+#!/bin/sh
+
+# failure_then_success_sample.sh
+#
+# A hook script that fails on initial run but succeeds on second run for testing purposes.
+#
+# Helpful for testing retry logic for post hooks.
+#
+# args: None
+#
+
+#
+# Writes the given message to standard output
+#
+# $* - The message to write
+#
+msg() {
+    echo "$*"
+}
+
+
+#
+# Writes the given information message to standard output
+#
+# $* - The message to write
+#
+info() {
+    msg "INFO: $*"
+}
+
+#
+# Writes the given error message to standard error
+#
+# $* - The message to write
+#
+error() {
+    msg "ERROR: $*" 1>&2
+}
+
+
+#
+# main
+#
+
+# log something to stdout
+info "running failure_success sample.sh"
+
+
+if [ -e /tmp/hook-test.junk ] ; then
+    info "File does exist.  Removing /tmp/hook-test.junk"
+    rm /tmp/hook-test.junk
+    info "Second run so returning exit code 0"
+    exit 0
+else
+    info "File does not exist.  Creating /tmp/hook-test.junk"
+    echo "test" > /tmp/hook-test.junk
+    error "Failed first run, returning exit code 5"
+    exit 5
+fi
+----
