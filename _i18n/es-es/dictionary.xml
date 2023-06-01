@@ -1915,7 +1915,6 @@
   <block id="e874bd0f330d9513016dc844dfd62e6f" category="paragraph">Siga la documentación de AWS para completar los pasos siguientes. Consulte<block ref="b5a7979c22035fe192b9eb8d0cab1e4a" category="inline-link-rx"></block>.</block>
   <block id="9c7a256a23d947f541662b1e88bac33d" category="list-text">Cree una red virtual AWS.</block>
   <block id="92d9212a67ec9da982a091cf92cb4347" category="list-text">Revise las instancias de computación EC2. Puede ser un servidor con configuración básica o máquinas virtuales en AWS.</block>
-  <block id="b881f78be517f5315cfb2d556f3448f7" category="list-text">Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestros y trabajadores, cambie el tipo de instancia en AWS para cumplir los requisitos de Astra. Consulte <block ref="32be9c8362ea42075ea0b5d43bb3b5d0" category="inline-link-macro-rx"></block>.</block>
   <block id="b109e192f966bb3bb3e8cd30e1a59bfa" category="list-text">Cree al menos un bloque de AWS S3 para almacenar los backups.</block>
   <block id="e5c5351f3ea6206a7f110205b4155acc" category="list-text">Cree un AWS Elastic Container Registry (ECR) para alojar todas las imágenes ACC.</block>
   <block id="9d58e473a9f64a9efe76c63ca0a30602" category="admonition">Si no crea la ECR, Astra Control Center no puede acceder a los datos de supervisión de un clúster que contenga Cloud Volumes ONTAP con un back-end de AWS. El problema se produce cuando el clúster que intenta detectar y gestionar mediante Astra Control Center no tiene acceso a AWS ECR.</block>
@@ -2028,9 +2027,6 @@
   <block id="2cce86879561a32f83b0b211ad079596" category="section-title">Instale un clúster RedHat OpenShift en Azure</block>
   <block id="ac7776656696332f732a35f1a0662432" category="paragraph">El primer paso es instalar un clúster RedHat OpenShift en Azure.</block>
   <block id="4f6685bd07b182993d024dcf856ff5ae" category="inline-link">Instalando el clúster de OpenShift en Azure</block>
-  <block id="fef256305fde869fc9c1b90f96dbebe5" category="list-text"><block ref="6613cf818db4dcdf36b939920f432c05" category="inline-link-rx"></block>.</block>
-  <block id="eed9d4fe807c07d271c864a1240c1c3f" category="inline-link">Instalar una cuenta de Azure</block>
-  <block id="03936dba93dbfb5fc2df3ced6ce0b025" category="list-text"><block ref="2950a8cca92e141f7cc27cfe82878caa" category="inline-link-rx"></block>.</block>
   <block id="9b227636b2d4cea11291793360089d9f" category="section-title">Cree grupos de recursos de Azure</block>
   <block id="b15c7c1cada48f735340ffa1ec2e4b6d" category="paragraph">Cree al menos un grupo de recursos de Azure.</block>
   <block id="f754cf28e9ca6bd457246cb85d6d5535" category="admonition">OpenShift podría crear sus propios grupos de recursos. Además de estos, también debe definir los grupos de recursos de Azure. Consulte la documentación de OpenShift.</block>
@@ -2716,4 +2712,8 @@
   <block id="1d79052461351a56ef4f9bf9f5837f4a" category="sidebar">Automatización con la API de REST</block>
   <block id="0b79795d3efc95b9976c7c5b933afce2" category="sidebar">Introducción</block>
   <block id="0adc03eac86772ad2c75c8f140be417e" category="sidebar">Conocimiento y apoyo</block>
+  <block id="1ba6670409b12d2ecffe5f765b22636d" category="list-text">Si el tipo de instancia no coincide con los requisitos mínimos de recursos de Astra para los nodos maestros y trabajadores, cambie el tipo de instancia en AWS para cumplir los requisitos de Astra.  Consulte <block ref="a41c664e3d2520e4c4deb907d0286272" category="inline-link-macro-rx"></block>.</block>
+  <block id="284a8b144f9341c750b469b574fb8c00" category="inline-link">Instalación del clúster OpenShift en Azure</block>
+  <block id="026f21beafa7ab4dd2e0a19c7d485bb6" category="inline-link">Instalar una cuenta de Azure</block>
+  <block id="49ffba9fa4ce5bf749cec20def44c0b9" category="paragraph">Para obtener instrucciones de instalación, consulte la documentación de RedHat en<block ref="2b5694f45e8e8a8a0bd04ce92001fd2c" category="inline-link-rx"></block> y..<block ref="b57239f3f933c36abb901cdf3e168d8f" category="inline-link-rx"></block>.</block>
 </blocks>
